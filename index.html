@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montiaer — Transformamos Atenção em Clientes</title>
+  <meta name="description" content="Agência de marketing digital que une tráfego pago, conteúdo e estratégia para gerar crescimento previsível." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics placeholder -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+  <!-- Meta Pixel placeholder -->
+  <!-- <script>!function(f,b,e,v,n,t,s)...</script> -->
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --sand:    #e8d9c4;
+      --gold:    #785d32;
+      --navy:    #060b31;
+      --maroon:  #3e160c;
+      --off-white: #f5efe6;
+      --text-on-dark: #e8d9c4cc;
+      --radius: 4px;
+      --transition: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+    ul { list-style: none; }
+
+    /* ── BASE ───────────────────────────────────── */
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--sand);
+      overflow-x: hidden;
+    }
+    .display { font-family: 'Cormorant Garamond', serif; }
+
+    /* ── NAVIGATION ─────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 5vw;
+      transition: background var(--transition), backdrop-filter var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(6, 11, 49, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(120, 93, 50, 0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--sand);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-on-dark);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--sand); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--sand) !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: var(--radius);
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--maroon) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--sand); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: var(--navy);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--sand);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO ───────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 8rem 5vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.25; pointer-events: none;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--maroon); top: -10%; left: -15%; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--gold); bottom: 0; right: -10%; animation-delay: -4s; }
+    .orb-3 { width: 300px; height: 300px; background: var(--navy); top: 40%; left: 40%; animation-delay: -7s; }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 900px; text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(120,93,50,0.4);
+      padding: 0.35rem 1rem; border-radius: 99px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s var(--transition) both;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.9s 0.1s var(--transition) both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      font-weight: 300;
+      color: var(--text-on-dark);
+      max-width: 560px; margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeUp 0.9s 0.2s var(--transition) both;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center;
+      animation: fadeUp 0.9s 0.3s var(--transition) both;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--sand);
+      padding: 0.85rem 2rem; border-radius: var(--radius);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: background var(--transition), transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--maroon); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(232,217,196,0.35); color: var(--sand);
+      padding: 0.85rem 2rem; border-radius: var(--radius);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: border-color var(--transition), background var(--transition), transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--sand); background: rgba(232,217,196,0.06); transform: translateY(-2px); }
+
+    /* Animated stats bar */
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 5rem;
+      animation: fadeUp 0.9s 0.45s var(--transition) both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 600; color: var(--sand);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.73rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-top: 0.3rem;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(232,217,196,0.4);
+      animation: fadeIn 1.5s 1s both;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(232,217,196,0.4), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.4; }
+      50% { transform: scaleY(1.3); opacity: 0.9; }
+    }
+
+    /* ── SECTIONS COMMON ────────────────────────── */
+    section { padding: 6rem 5vw; }
+    .section-eyebrow {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 300; line-height: 1.15;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--gold); margin: 1.5rem 0;
+    }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--transition), transform 0.7s var(--transition); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── SOBRE ──────────────────────────────────── */
+    #sobre { background: rgba(232,217,196,0.03); }
+    .sobre-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .sobre-text p { color: var(--text-on-dark); line-height: 1.8; margin-bottom: 1rem; font-size: 1.02rem; }
+    .socios { display: flex; gap: 1.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .socio {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(232,217,196,0.05);
+      border: 1px solid rgba(120,93,50,0.25);
+      border-radius: var(--radius); padding: 1rem 1.4rem;
+      flex: 1; min-width: 200px;
+    }
+    .socio-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--maroon));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; color: var(--sand);
+      flex-shrink: 0;
+    }
+    .socio-name { font-weight: 500; font-size: 0.9rem; }
+    .socio-role { font-size: 0.75rem; color: var(--gold); margin-top: 0.2rem; }
+    .sobre-visual {
+      position: relative; height: 480px;
+    }
+    .sobre-card {
+      position: absolute; border-radius: 8px;
+      border: 1px solid rgba(120,93,50,0.2);
+      overflow: hidden;
+    }
+    .sobre-card-main {
+      inset: 0;
+      background: linear-gradient(160deg, rgba(62,22,12,0.6), rgba(6,11,49,0.8));
+      display: flex; align-items: flex-end; padding: 2rem;
+    }
+    .sobre-card-main::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(120,93,50,0.04) 20px,
+        rgba(120,93,50,0.04) 21px
+      );
+    }
+    .sobre-badge {
+      background: var(--gold); color: var(--sand);
+      padding: 0.4rem 0.9rem; border-radius: 99px;
+      font-size: 0.8rem; font-weight: 500;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+    }
+    .sobre-card-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; font-style: italic;
+      line-height: 1.4; position: relative; z-index: 1;
+    }
+
+    /* ── SERVIÇOS ───────────────────────────────── */
+    #servicos { }
+    .servicos-header { max-width: 1100px; margin: 0 auto 3.5rem; }
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2px;
+      max-width: 1100px; margin: 0 auto;
+      background: rgba(120,93,50,0.15);
+      border: 1px solid rgba(120,93,50,0.15);
+    }
+    .servico-card {
+      background: var(--navy);
+      padding: 2.4rem 2rem;
+      transition: background var(--transition);
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    .servico-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .servico-card:hover { background: rgba(232,217,196,0.04); }
+    .servico-card:hover::after { transform: scaleX(1); }
+    .servico-icon {
+      font-size: 1.8rem; margin-bottom: 1.2rem;
+      display: block;
+    }
+    .servico-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; margin-bottom: 0.75rem;
+    }
+    .servico-desc { font-size: 0.88rem; color: var(--text-on-dark); line-height: 1.7; }
+
+    /* ── MÉTODO ─────────────────────────────────── */
+    #metodo { background: rgba(232,217,196,0.03); }
+    .metodo-inner { max-width: 1100px; margin: 0 auto; }
+    .metodo-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 0; margin-top: 3rem;
+      position: relative;
+    }
+    .metodo-steps::before {
+      content: '';
+      position: absolute; top: 2rem; left: 5%; right: 5%;
+      height: 1px; background: rgba(120,93,50,0.3);
+    }
+    .step {
+      text-align: center; padding: 0 0.5rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .step-num {
+      width: 4rem; height: 4rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      background: var(--navy); border: 1px solid var(--gold);
+      color: var(--gold); margin-bottom: 1.2rem; position: relative; z-index: 1;
+      transition: background var(--transition), color var(--transition);
+    }
+    .step:hover .step-num { background: var(--gold); color: var(--navy); }
+    .step-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .step-desc { font-size: 0.78rem; color: var(--text-on-dark); line-height: 1.6; }
+
+    /* ── RESULTADOS ─────────────────────────────── */
+    #resultados { }
+    .resultados-inner { max-width: 1100px; margin: 0 auto; }
+    .metricas {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; margin: 3rem 0;
+    }
+    .metrica {
+      background: rgba(232,217,196,0.04);
+      border: 1px solid rgba(120,93,50,0.2);
+      border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .metrica:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .metrica-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 600; color: var(--gold); line-height: 1;
+    }
+    .metrica-desc { font-size: 0.82rem; color: var(--text-on-dark); margin-top: 0.4rem; line-height: 1.5; }
+
+    .depoimentos {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .depoimento {
+      background: rgba(232,217,196,0.04);
+      border: 1px solid rgba(120,93,50,0.15);
+      border-radius: var(--radius); padding: 2rem;
+      position: relative;
+    }
+    .depoimento::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; color: var(--gold); opacity: 0.2;
+      position: absolute; top: -0.5rem; left: 1rem;
+      line-height: 1;
+    }
+    .dep-texto { font-size: 0.92rem; color: var(--text-on-dark); line-height: 1.7; margin-bottom: 1.2rem; }
+    .dep-autor { display: flex; align-items: center; gap: 0.8rem; }
+    .dep-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--maroon));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.85rem; color: var(--sand);
+    }
+    .dep-nome { font-weight: 500; font-size: 0.85rem; }
+    .dep-cargo { font-size: 0.73rem; color: var(--gold); }
+
+    /* ── PORTFÓLIO ──────────────────────────────── */
+    #portfolio { background: rgba(232,217,196,0.02); }
+    .portfolio-inner { max-width: 1100px; margin: 0 auto; }
+    .portfolio-tabs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0 2.5rem;
+    }
+    .tab-btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 99px;
+      border: 1px solid rgba(120,93,50,0.3);
+      font-size: 0.8rem; letter-spacing: 0.06em;
+      color: var(--text-on-dark); transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--gold); color: var(--sand); border-color: var(--gold);
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+    .portfolio-item {
+      border-radius: var(--radius); overflow: hidden;
+      position: relative; cursor: pointer;
+      background: rgba(232,217,196,0.06);
+      border: 1px solid rgba(120,93,50,0.15);
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .portfolio-item:first-child { grid-column: span 2; }
+    .portfolio-item:hover { transform: scale(1.01); border-color: var(--gold); }
+    .portfolio-item-inner {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(62,22,12,0.5), rgba(6,11,49,0.7));
+      display: flex; align-items: flex-end; padding: 1.5rem;
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .portfolio-item:hover .portfolio-item-inner { opacity: 1; }
+    .portfolio-thumb {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    .portfolio-label { font-size: 0.85rem; font-weight: 500; }
+    .portfolio-cat { font-size: 0.72rem; color: var(--gold); margin-top: 0.2rem; }
+
+    /* ── FAQ ────────────────────────────────────── */
+    #faq { }
+    .faq-inner {
+      max-width: 780px; margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(120,93,50,0.2);
+    }
+    .faq-question {
+      width: 100%; text-align: left;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 0; gap: 1rem;
+      font-size: 1rem; font-weight: 400; color: var(--sand);
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: 1px solid rgba(120,93,50,0.4); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--gold);
+      transition: transform 0.3s, background 0.2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); color: var(--navy); }
+    .faq-answer {
+      font-size: 0.9rem; color: var(--text-on-dark);
+      line-height: 1.8; overflow: hidden;
+      max-height: 0; transition: max-height 0.45s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 1.4rem; }
+
+    /* ── CTA FINAL ──────────────────────────────── */
+    #cta-final {
+      background: linear-gradient(135deg, var(--maroon) 0%, rgba(62,22,12,0.8) 50%, var(--navy) 100%);
+      text-align: center; padding: 8rem 5vw;
+      position: relative; overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 30px,
+        rgba(120,93,50,0.04) 30px, rgba(120,93,50,0.04) 31px
+      );
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .cta-title em { font-style: italic; color: var(--sand); opacity: 0.75; }
+    .cta-sub { font-size: 1rem; color: var(--text-on-dark); margin-bottom: 2.5rem; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── CONTATO FORM ───────────────────────────── */
+    #contato {
+      background: rgba(232,217,196,0.03);
+      padding: 6rem 5vw;
+    }
+    .contato-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; max-width: 1100px; margin: 0 auto; align-items: start;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.78rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: rgba(232,217,196,0.06);
+      border: 1px solid rgba(120,93,50,0.25);
+      border-radius: var(--radius); padding: 0.8rem 1rem;
+      color: var(--sand); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--gold);
+    }
+    .form-group select option { background: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      width: 100%;
+      background: var(--gold); color: var(--sand);
+      padding: 1rem; border-radius: var(--radius);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+      transition: background var(--transition); margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--maroon); }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      background: rgba(0,0,0,0.4);
+      border-top: 1px solid rgba(120,93,50,0.15);
+      padding: 4rem 5vw 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; max-width: 1100px; margin: 0 auto 3rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.8rem;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-desc { font-size: 0.85rem; color: var(--text-on-dark); line-height: 1.7; }
+    .footer-social { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+    .social-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(120,93,50,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: var(--text-on-dark);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--sand); background: rgba(120,93,50,0.15); }
+    .footer-col h4 {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a {
+      font-size: 0.85rem; color: var(--text-on-dark);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--sand); }
+    .footer-bottom {
+      border-top: 1px solid rgba(120,93,50,0.1);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; max-width: 1100px; margin: 0 auto;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(232,217,196,0.35); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: rgba(232,217,196,0.35); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sand); }
+
+    /* ── WHATSAPP FLOAT ─────────────────────────── */
+    .whatsapp-float {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+    .wa-tooltip {
+      position: absolute; right: 68px; white-space: nowrap;
+      background: rgba(6,11,49,0.9); color: var(--sand);
+      font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: var(--radius);
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ── ANIMATIONS ─────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 900px) {
+      .sobre-grid { grid-template-columns: 1fr; }
+      .sobre-visual { height: 280px; }
+      .metodo-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .metodo-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .contato-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-item:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 1.2rem; }
+      .hero-stats { gap: 2rem; }
+      .metodo-steps { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item:first-child { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .servicos-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────── -->
+<nav id="nav">
+  <div class="nav-logo">mont<span>i</span>aer</div>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#metodo">Método</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#portfolio">Portfólio</a>
+    <a href="#contato" class="nav-cta">Falar Agora</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#sobre" onclick="closeMobileMenu()">Sobre</a>
+  <a href="#servicos" onclick="closeMobileMenu()">Serviços</a>
+  <a href="#metodo" onclick="closeMobileMenu()">Método</a>
+  <a href="#resultados" onclick="closeMobileMenu()">Resultados</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Portfólio</a>
+  <a href="#contato" onclick="closeMobileMenu()">Contato</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────── -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Agência de Resultados</div>
+    <h1 class="hero-title display">
+      Transformamos<br /><em>atenção</em> em clientes
+    </h1>
+    <p class="hero-sub">
+      Unimos tráfego pago, conteúdo estratégico e design de alta conversão para gerar crescimento previsível — sem achismo, só resultado.
+    </p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">Solicitar Diagnóstico Gratuito</a>
+      <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" rel="noopener" class="btn-outline">💬 Falar no WhatsApp</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" data-count="+150">+150</div>
+        <div class="stat-label">Clientes Atendidos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="8.4">8.4×</div>
+        <div class="stat-label">ROAS Médio</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="87">87%</div>
+        <div class="stat-label">Taxa de Retenção</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">R$10K+</div>
+        <div class="stat-label">Em Verba Gerenciada/mês</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── SOBRE ─────────────────────────────────── -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-text fade-in">
+      <div class="section-eyebrow">Sobre a Montiaer</div>
+      <h2 class="section-title display">
+        Estratégia que<br /><em>gera resultado real</em>
+      </h2>
+      <div class="divider"></div>
+      <p>A Montiaer nasceu da crença de que marketing digital feito com inteligência transforma negócios. Combinamos criatividade e performance para entregar crescimento que você pode medir.</p>
+      <p>Nossa missão é simples: conectar marcas às pessoas certas, no momento certo, com a mensagem que converte.</p>
+
+      <div class="socios">
+        <div class="socio">
+          <div class="socio-avatar">NF</div>
+          <div>
+            <div class="socio-name">Nathaly França</div>
+            <div class="socio-role">Direção Criativa & Estratégia Digital</div>
+          </div>
+        </div>
+        <div class="socio">
+          <div class="socio-avatar">FP</div>
+          <div>
+            <div class="socio-name">Fábio Koziel</div>
+            <div class="socio-role">Tráfego Pago & Performance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sobre-visual fade-in">
+      <div class="sobre-card sobre-card-main">
+        <div class="sobre-badge">✦ Desde 2023</div>
+        <blockquote class="sobre-card-quote display">
+          "Cada real investido deve trabalhar para você — esse é o nosso compromisso."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVIÇOS ───────────────────────────────── -->
+<section id="servicos">
+  <div class="servicos-header fade-in">
+    <div class="section-eyebrow">O que fazemos</div>
+    <h2 class="section-title display">Serviços que <em>movem números</em></h2>
+  </div>
+  <div class="servicos-grid">
+    <div class="servico-card fade-in">
+      <span class="servico-icon">📈</span>
+      <div class="servico-name display">Tráfego Pago</div>
+      <p class="servico-desc">Meta Ads, Google Ads e TikTok Ads com estratégia de segmentação precisa. Cada campanha otimizada para o menor custo por aquisição possível.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <span class="servico-icon">📲</span>
+      <div class="servico-name display">Social Media</div>
+      <p class="servico-desc">Conteúdo que engaja e converte. Planejamento editorial, produção criativa e gestão de comunidade alinhados à sua estratégia de negócio.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <span class="servico-icon">🎨</span>
+      <div class="servico-name display">Design Estratégico</div>
+      <p class="servico-desc">Identidade visual, criativos para anúncios e peças que comunicam autoridade. Design que serve à conversão, não só à estética.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <span class="servico-icon">🎥</span>
+      <div class="servico-name display">Videomaker</div>
+      <p class="servico-desc">Produção de vídeos para anúncios, Reels, cases e institucionais. Conteúdo audiovisual com roteiro estratégico para máximo impacto.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <span class="servico-icon">🧭</span>
+      <div class="servico-name display">Estratégia Digital</div>
+      <p class="servico-desc">Diagnóstico completo do seu ecossistema digital, definição de posicionamento, persona e plano de crescimento escalável.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <span class="servico-icon">🚀</span>
+      <div class="servico-name display">Conversão & Funis</div>
+      <p class="servico-desc">Landing pages de alta conversão, automações de e-mail e WhatsApp, funis de vendas do topo ao fundo. Da atenção ao fechamento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL MEDIA ────────────────────────────── -->
+<section id="social-media" style="background: rgba(120,93,50,0.07); padding: 6rem 5vw;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-in" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="section-eyebrow">Especialidade da casa</div>
+      <h2 class="section-title display">Social Media que <em>gera negócio</em></h2>
+      <p style="color:var(--text-on-dark);max-width:580px;margin:1.2rem auto 0;line-height:1.8;font-size:0.98rem;">
+        Não criamos conteúdo só pra encher feed. Cada post, Reel e story é construído com intenção estratégica — para gerar alcance, autoridade e conversão real.
+      </p>
+    </div>
+
+    <!-- O que está incluso -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-bottom:3.5rem;">
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">🗓️</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Planejamento Editorial</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Calendário mensal com pautas alinhadas à sua persona, sazonalidade e objetivos de negócio. Zero improvisação.</p>
+      </div>
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">🎬</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Reels & Stories</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Roteiro, produção e edição de vídeos curtos que geram alcance orgânico e colocam sua marca no radar de novos clientes todos os dias.</p>
+      </div>
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">✍️</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Copy Estratégica</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Textos que falam com sua audiência no tom certo — informam, geram identificação e conduzem naturalmente à ação.</p>
+      </div>
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">🎨</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Design de Feed</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Identidade visual consistente em todas as peças. Feed que causa primeira boa impressão e comunica profissionalismo antes de uma palavra ser lida.</p>
+      </div>
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">💬</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Gestão de Comunidade</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Respostas nos comentários e DMs com agilidade e o tom da sua marca. Engajamento real que constrói relacionamento e fideliza.</p>
+      </div>
+      <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
+        <div style="font-size:1.6rem;margin-bottom:0.9rem;">📊</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;">Relatório Mensal</div>
+        <p style="font-size:0.84rem;color:var(--text-on-dark);line-height:1.7;">Análise completa de alcance, engajamento, crescimento de seguidores e principais aprendizados. Você sabe exatamente o que está acontecendo.</p>
+      </div>
+    </div>
+
+    <!-- Plataformas -->
+    <div class="fade-in" style="border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:2.5rem;display:flex;flex-wrap:wrap;align-items:center;gap:2rem;justify-content:space-between;">
+      <div>
+        <div style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Plataformas que gerenciamos</div>
+        <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;">
+          <span style="background:rgba(232,217,196,0.06);border:1px solid rgba(120,93,50,0.2);border-radius:99px;padding:0.4rem 1rem;font-size:0.82rem;">📸 Instagram</span>
+          <span style="background:rgba(232,217,196,0.06);border:1px solid rgba(120,93,50,0.2);border-radius:99px;padding:0.4rem 1rem;font-size:0.82rem;">🎵 TikTok</span>
+          <span style="background:rgba(232,217,196,0.06);border:1px solid rgba(120,93,50,0.2);border-radius:99px;padding:0.4rem 1rem;font-size:0.82rem;">💼 LinkedIn</span>
+          <span style="background:rgba(232,217,196,0.06);border:1px solid rgba(120,93,50,0.2);border-radius:99px;padding:0.4rem 1rem;font-size:0.82rem;">▶️ YouTube</span>
+          <span style="background:rgba(232,217,196,0.06);border:1px solid rgba(120,93,50,0.2);border-radius:99px;padding:0.4rem 1rem;font-size:0.82rem;">💬 WhatsApp Business</span>
+        </div>
+      </div>
+      <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" rel="noopener" class="btn-primary" style="white-space:nowrap;">Quero meu Social Media →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MÉTODO ─────────────────────────────────── -->
+<section id="metodo">
+  <div class="metodo-inner">
+    <div class="fade-in">
+      <div class="section-eyebrow">Como trabalhamos</div>
+      <h2 class="section-title display">Nosso <em>método em 5 etapas</em></h2>
+    </div>
+    <div class="metodo-steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <div class="step-title">Diagnóstico</div>
+        <p class="step-desc">Analisamos seu negócio, concorrência, histórico de anúncios e oportunidades ocultas.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">02</div>
+        <div class="step-title">Estratégia</div>
+        <p class="step-desc">Desenhamos o plano de ação, canais, criativo e estrutura de funil com metas claras.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">03</div>
+        <div class="step-title">Execução</div>
+        <p class="step-desc">Lançamos campanhas, criamos conteúdo e implementamos as peças com precisão técnica.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">04</div>
+        <div class="step-title">Otimização</div>
+        <p class="step-desc">Monitoramos dados em tempo real e ajustamos continuamente para melhorar os resultados.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">05</div>
+        <div class="step-title">Escala</div>
+        <p class="step-desc">Com o que funciona validado, escalamos investimento de forma controlada e previsível.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESULTADOS ─────────────────────────────── -->
+<section id="resultados">
+  <div class="resultados-inner">
+    <div class="fade-in">
+      <div class="section-eyebrow">Provas & Resultados</div>
+      <h2 class="section-title display">Números que <em>falam por nós</em></h2>
+    </div>
+
+    <div class="metricas">
+      <div class="metrica fade-in">
+        <div class="metrica-num">+340%</div>
+        <div class="metrica-desc">aumento de faturamento para e-commerce de moda em 6 meses</div>
+      </div>
+      <div class="metrica fade-in">
+        <div class="metrica-num">R$0,38</div>
+        <div class="metrica-desc">custo por lead para clínica estética com Meta Ads</div>
+      </div>
+      <div class="metrica fade-in">
+        <div class="metrica-num">12×</div>
+        <div class="metrica-desc">ROAS em campanha de lançamento de produto digital</div>
+      </div>
+      <div class="metrica fade-in">
+        <div class="metrica-num">-62%</div>
+        <div class="metrica-desc">redução no CAC após reestruturação de funil de vendas</div>
+      </div>
+    </div>
+
+    <div class="depoimentos">
+      <div class="depoimento fade-in">
+        <p class="dep-texto">A Montiaer mudou completamente nosso jogo no digital. Em 4 meses triplicamos as vendas online. O que mais me impressionou foi a transparência nos dados e a velocidade de resposta.</p>
+        <div class="dep-autor">
+          <div class="dep-avatar">CR</div>
+          <div>
+            <div class="dep-nome">Carolina Ribeiro</div>
+            <div class="dep-cargo">CEO — Estúdio CR Moda</div>
+          </div>
+        </div>
+      </div>
+      <div class="depoimento fade-in">
+        <p class="dep-texto">Investimos R$8 mil em anúncios e tivemos R$96 mil em vendas. Isso não é exagero, é o relatório que eles me mandaram. Nunca vi resultado assim com outra agência.</p>
+        <div class="dep-autor">
+          <div class="dep-avatar">MO</div>
+          <div>
+            <div class="dep-nome">Marcos Oliveira</div>
+            <div class="dep-cargo">Fundador — Clínica VitaleSkin</div>
+          </div>
+        </div>
+      </div>
+      <div class="depoimento fade-in">
+        <p class="dep-texto">Profissionalismo do início ao fim. A Nathaly e o Fábio entendem de verdade o que é estratégia. Minha marca ficou muito mais consistente e as vendas acompanharam.</p>
+        <div class="dep-autor">
+          <div class="dep-avatar">AL</div>
+          <div>
+            <div class="dep-nome">Ana Lucena</div>
+            <div class="dep-cargo">Empreendedora — Ateliê Lucena</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTFÓLIO ──────────────────────────────── -->
+<section id="portfolio">
+  <div class="portfolio-inner">
+    <div class="fade-in">
+      <div class="section-eyebrow">Nosso trabalho</div>
+      <h2 class="section-title display">Portfólio <em>selecionado</em></h2>
+    </div>
+    <div class="portfolio-tabs fade-in">
+      <button class="tab-btn active">Todos</button>
+      <button class="tab-btn">Criativos</button>
+      <button class="tab-btn">Identidade Visual</button>
+      <button class="tab-btn">Landing Pages</button>
+      <button class="tab-btn">Vídeos</button>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item fade-in">
+        <div class="portfolio-thumb">🛍️</div>
+        <div class="portfolio-item-inner">
+          <div>
+            <div class="portfolio-label">Campanha Black Friday</div>
+            <div class="portfolio-cat">Tráfego Pago · Meta Ads</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item fade-in">
+        <div class="portfolio-thumb">💅</div>
+        <div class="portfolio-item-inner">
+          <div>
+            <div class="portfolio-label">Identidade — Clínica Estética</div>
+            <div class="portfolio-cat">Design Estratégico</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item fade-in">
+        <div class="portfolio-thumb">🎯</div>
+        <div class="portfolio-item-inner">
+          <div>
+            <div class="portfolio-label">Landing Page de Lançamento</div>
+            <div class="portfolio-cat">Conversão · Funil</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item fade-in">
+        <div class="portfolio-thumb">📹</div>
+        <div class="portfolio-item-inner">
+          <div>
+            <div class="portfolio-label">Vídeo Institucional</div>
+            <div class="portfolio-cat">Videomaker</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item fade-in">
+        <div class="portfolio-thumb">✨</div>
+        <div class="portfolio-item-inner">
+          <div>
+            <div class="portfolio-label">Social Media — Restaurante</div>
+            <div class="portfolio-cat">Gestão de Redes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────────────── -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 3rem;">
+      <div class="section-eyebrow">Dúvidas Frequentes</div>
+      <h2 class="section-title display">Antes de <em>começarmos</em></h2>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question">
+        Qual o investimento mínimo em anúncios?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Trabalhamos com verba de anúncios a partir de R$1.500/mês. Recomendamos esse valor mínimo para que as plataformas (Meta, Google) aprendam e otimizem de forma eficiente. Quanto maior a verba, mais rápido escalamos os resultados.
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-question">
+        Preciso assinar contrato de fidelidade?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Nossos contratos têm prazo mínimo de 3 meses, necessário para que o algoritmo aprenda e os resultados se consolidem. Após esse período, renovamos mensalmente. Acreditamos que você vai querer ficar pelos resultados, não pela obrigação.
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-question">
+        Em quanto tempo verei resultados?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Os primeiros resultados aparecem já no 1º mês (dependendo do nicho e verba). A consolidação e escala consistente costumam ocorrer entre 60 e 90 dias. Somos transparentes: não prometemos milagres, prometemos processo.
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-question">
+        Como funciona o acompanhamento dos resultados?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Você terá acesso a um dashboard com métricas em tempo real. Realizamos reuniões mensais de estratégia e você recebe relatório detalhado a cada 30 dias. Nosso time está disponível via WhatsApp em horário comercial.
+      </div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-question">
+        Vocês atendem qualquer nicho de mercado?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Temos experiência em e-commerce, saúde, estética, serviços locais, infoprodutos, moda e gastronomia. Antes de fechar parceria, fazemos um diagnóstico gratuito para avaliar o potencial do seu negócio e ser honesto sobre as expectativas.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ──────────────────────────────── -->
+<section id="cta-final">
+  <div class="cta-inner fade-in">
+    <div class="section-eyebrow">Próximo passo</div>
+    <h2 class="cta-title display">
+      Seu negócio merece<br /><em>crescer de verdade</em>
+    </h2>
+    <p class="cta-sub">Agende um diagnóstico gratuito de 30 minutos. Vamos analisar seu cenário atual e mostrar exatamente o que é possível fazer — sem compromisso.</p>
+    <div class="cta-btns">
+      <a href="#contato" class="btn-primary">Agendar Diagnóstico Gratuito</a>
+      <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" rel="noopener" class="btn-outline">Falar pelo WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTATO ────────────────────────────────── -->
+<section id="contato">
+  <div class="contato-grid">
+    <div class="fade-in">
+      <div class="section-eyebrow">Entre em contato</div>
+      <h2 class="section-title display">Vamos <em>conversar</em></h2>
+      <div class="divider"></div>
+      <p style="color: var(--text-on-dark); line-height: 1.8; margin-bottom: 2rem; font-size: 0.95rem;">
+        Preencha o formulário e nossa equipe entra em contato em até 24h úteis para agendar seu diagnóstico gratuito.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-on-dark);font-size:0.9rem;">
+          <span style="color:var(--gold);">💬</span> WhatsApp: (47) 99620-5894
+        </a>
+        <a href="mailto:contato@montiaer.com.br" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-on-dark);font-size:0.9rem;">
+          <span style="color:var(--gold);">✉️</span> contato@montiaer.com.br
+        </a>
+        <a href="https://instagram.com/montiaer" target="_blank" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-on-dark);font-size:0.9rem;">
+          <span style="color:var(--gold);">📸</span> @montiaer
+        </a>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="form-group">
+        <label>Seu nome</label>
+        <input type="text" placeholder="Como podemos te chamar?" />
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" placeholder="seu@email.com" />
+      </div>
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="+55 11 99999-9999" />
+      </div>
+      <div class="form-group">
+        <label>Segmento do negócio</label>
+        <select>
+          <option value="">Selecione seu segmento</option>
+          <option>E-commerce</option>
+          <option>Saúde & Estética</option>
+          <option>Gastronomia</option>
+          <option>Moda & Lifestyle</option>
+          <option>Serviços Locais</option>
+          <option>Infoprodutos & Cursos</option>
+          <option>Outros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Verba mensal em anúncios</label>
+        <select>
+          <option value="">Selecione a verba atual</option>
+          <option>Ainda não invisto</option>
+          <option>Até R$1.500</option>
+          <option>R$1.500 – R$5.000</option>
+          <option>R$5.000 – R$15.000</option>
+          <option>Acima de R$15.000</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Conte seu maior desafio</label>
+        <textarea placeholder="O que está te impedindo de crescer mais rápido?"></textarea>
+      </div>
+      <button class="form-submit" onclick="handleFormSubmit(event)">Solicitar Diagnóstico Gratuito →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">mont<span>i</span>aer</div>
+      <p class="footer-desc">Agência de marketing digital especializada em tráfego pago, conteúdo estratégico e design de alta conversão. Transformamos atenção em clientes.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/montiaer" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="mailto:contato@montiaer.com.br" class="social-link" aria-label="E-mail">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="#servicos">Tráfego Pago</a></li>
+        <li><a href="#servicos">Social Media</a></li>
+        <li><a href="#servicos">Design Estratégico</a></li>
+        <li><a href="#servicos">Videomaker</a></li>
+        <li><a href="#servicos">Landing Pages</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#sobre">Sobre a Montiaer</a></li>
+        <li><a href="#metodo">Nosso Método</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!">WhatsApp</a></li>
+        <li><a href="mailto:contato@montiaer.com.br">E-mail</a></li>
+        <li><a href="https://instagram.com/montiaer">Instagram</a></li>
+        <li><a href="#contato">Diagnóstico Grátis</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Montiaer. Todos os direitos reservados.</p>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── WHATSAPP FLUTUANTE ──────────────────────── -->
+<a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Montiaer%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <span class="wa-tooltip">Falar no WhatsApp</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // ── NAV SCROLL ───────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── MOBILE MENU ──────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── SCROLL REVEAL ────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── FAQ ──────────────────────────────────────
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── PORTFOLIO TABS ───────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // ── FORM SUBMIT ──────────────────────────────
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Enviado! Entraremos em contato em breve.';
+    btn.style.background = 'var(--maroon)';
+    btn.disabled = true;
+    // Aqui você pode integrar com seu backend, Zapier, Make, etc.
+  }
+
+  // ── SMOOTH ANCHOR WITH OFFSET ────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
