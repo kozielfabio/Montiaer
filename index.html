@@ -1,3 +1,4 @@
+cat << 'HTMLEOF' | python3 /home/claude/apply_fix.py > /home/claude/montiaer_fixed.html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,12 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Google Analytics placeholder -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
-
-  <!-- Meta Pixel placeholder -->
-  <!-- <script>!function(f,b,e,v,n,t,s)...</script> -->
 
   <style>
     /* ── TOKENS ─────────────────────────────────── */
@@ -65,6 +60,8 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--sand);
+      display: flex;
+      align-items: center;
     }
     .nav-logo span { color: var(--gold); }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -570,10 +567,10 @@
       gap: 3rem; max-width: 1100px; margin: 0 auto 3rem;
     }
     .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.8rem;
+      font-size: 0;
+      line-height: 1;
+      margin-bottom: 0;
     }
-    .footer-logo span { color: var(--gold); }
     .footer-desc { font-size: 0.85rem; color: var(--text-on-dark); line-height: 1.7; }
     .footer-social { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
     .social-link {
@@ -667,11 +664,9 @@
 <!-- ── NAVIGATION ──────────────────────────── -->
 <nav id="nav">
   <div class="nav-logo">
-  <img src="./src/img/logo2.png"
-       alt="Montiaer"
-       style="height:48px;width:auto;filter:brightness(0) invert(1);">
-</div>
- <div class="nav-links">
+    <img src="src/img/logo2.png" alt="Montiaer" style="display:block;height:40px;width:auto;filter:brightness(0) invert(1);">
+  </div>
+  <div class="nav-links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
     <a href="#metodo">Método</a>
@@ -701,7 +696,7 @@
 
   <div class="hero-inner">
     <div style="margin-bottom:2rem;animation:fadeUp 0.7s var(--transition) both;">
-      <img src="src/img/logo2.png" alt="Montiaer Agência MKT" style="height:80px;width:auto;margin:0 auto;filter:brightness(0) invert(1);" />
+      <img src="src/img/logo2.png" alt="Montiaer Agência MKT" style="display:block;height:72px;width:auto;margin:0 auto;filter:brightness(0) invert(1);" />
     </div>
     <div class="hero-eyebrow">Agência de Resultados</div>
     <h1 class="hero-title display">
@@ -833,7 +828,6 @@
       </p>
     </div>
 
-    <!-- O que está incluso -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-bottom:3.5rem;">
       <div class="fade-in" style="background:rgba(232,217,196,0.04);border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:1.8rem 1.5rem;">
         <div style="font-size:1.6rem;margin-bottom:0.9rem;">🗓️</div>
@@ -867,7 +861,6 @@
       </div>
     </div>
 
-    <!-- Plataformas -->
     <div class="fade-in" style="border:1px solid rgba(120,93,50,0.2);border-radius:4px;padding:2.5rem;display:flex;flex-wrap:wrap;align-items:center;gap:2rem;justify-content:space-between;">
       <div>
         <div style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Plataformas que gerenciamos</div>
@@ -994,7 +987,6 @@
       <button class="tab-btn active">Todos</button>
       <button class="tab-btn">Criativos</button>
       <button class="tab-btn">Identidade Visual</button>
-      
     </div>
     <div class="portfolio-grid">
       <div class="portfolio-item fade-in">
@@ -1015,8 +1007,6 @@
           </div>
         </div>
       </div>
-
-
       <div class="portfolio-item fade-in">
         <div class="portfolio-thumb">✨</div>
         <div class="portfolio-item-inner">
@@ -1173,7 +1163,7 @@
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-logo"><img src="src/img/logo2.png" alt="Montiaer" style="height:52px;width:auto;filter:brightness(0) invert(1);margin-bottom:0.5rem;" /></div>
+      <div class="footer-logo"><img src="src/img/logo2.png" alt="Montiaer" style="display:block;height:44px;width:auto;filter:brightness(0) invert(1);margin-bottom:0.8rem;" /></div>
       <p class="footer-desc">Agência de marketing digital especializada em tráfego pago, conteúdo estratégico e design de alta conversão. Transformamos atenção em clientes.</p>
       <div class="footer-social">
         <a href="https://instagram.com/montiaer" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
@@ -1320,3 +1310,8 @@
 </script>
 </body>
 </html>
+HTMLEOF
+wc -l /home/claude/montiaer_fixed.html
+Saída
+
+1312 /home/claude/montiaer_fixed.html
