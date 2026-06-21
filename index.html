@@ -152,7 +152,7 @@
       margin-bottom: 2.5rem;
       animation: fadeUp 0.7s var(--ease) both;
     }
-    .hero-logo-wrap img { height: 250px; width: auto; margin: 0 auto; }
+    .hero-logo-wrap img { height: 110px; width: auto; margin: 0 auto; }
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 0.6rem;
@@ -553,41 +553,202 @@
       padding: 0.42rem 1.1rem; border-radius: 99px;
       border: 1px solid var(--border);
       font-size: 0.78rem; letter-spacing: 0.08em;
-      color: var(--sand-dim); transition: all 0.2s;
+      color: var(--sand-dim); transition: all 0.2s; cursor: pointer;
     }
     .tab-btn.active, .tab-btn:hover {
       background: var(--gold); color: var(--navy); border-color: var(--gold);
     }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
+
+    /* Tab panels */
+    .portfolio-panel { display: none; }
+    .portfolio-panel.active { display: block; }
+
+    /* ── CARROSSEL SOCIAL MEDIA / IDENTIDADE ── */
+    .pf-carousel {
+      position: relative;
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       overflow: hidden;
     }
-    .portfolio-item {
-      position: relative; cursor: pointer;
+    .pf-track {
+      display: flex;
+      transition: transform 0.55s var(--ease);
+    }
+    .pf-slide {
+      min-width: 100%; display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .pf-slide-img {
+      overflow: hidden;
+      max-height: 480px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.2);
+    }
+    .pf-slide-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .pf-slide-text {
+      padding: 3rem 2.8rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .pf-slide-eyebrow {
+      font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .pf-slide-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 18px; height: 1px; background: var(--gold);
+    }
+    .pf-slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 300; line-height: 1.2; color: var(--sand);
+    }
+    .pf-slide-title em { font-style: italic; color: var(--gold-light); }
+    .pf-slide-desc {
+      font-size: 0.87rem; color: var(--sand-dim); line-height: 1.8;
+    }
+    .pf-slide-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--navy);
+      padding: 0.72rem 1.6rem; border-radius: var(--radius);
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;
+      width: fit-content;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+    }
+    .pf-slide-cta:hover {
+      background: var(--gold-light); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(160,120,69,0.22);
+    }
+
+    /* Nav arrows */
+    .pf-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      display: flex; gap: 0; z-index: 10;
+      right: 1.4rem;
+      flex-direction: column; gap: 0.5rem;
+    }
+    .pf-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-gold);
+      background: rgba(6,12,46,0.75); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 0.9rem;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .pf-arrow:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+    /* Dots */
+    .pf-dots {
+      display: flex; gap: 0.5rem; justify-content: center;
+      padding: 1.1rem 0 1.3rem;
+      border-top: 1px solid var(--border);
+      background: var(--glass);
+    }
+    .pf-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--border-gold); cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .pf-dot.active { background: var(--gold); transform: scale(1.4); }
+
+    /* ── CARROSSEL TRÁFEGO PAGO ── */
+    .pf-tp-carousel {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .pf-tp-track {
+      display: flex;
+      transition: transform 0.55s var(--ease);
+    }
+    .pf-tp-slide {
+      min-width: 100%;
+      display: flex; flex-direction: column;
+    }
+    .pf-tp-img-wrap {
+      width: 100%; overflow: hidden;
+      background: rgba(0,0,0,0.25);
+      max-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pf-tp-img-wrap img {
+      width: 100%; object-fit: cover; display: block;
+    }
+    .pf-tp-body {
+      padding: 2.2rem 2.8rem 2.4rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      background: var(--glass);
+    }
+    .pf-tp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 300; line-height: 1.25; color: var(--sand);
+    }
+    .pf-tp-title em { font-style: italic; color: var(--gold-light); }
+    .pf-tp-desc {
+      font-size: 0.87rem; color: var(--sand-dim); line-height: 1.8;
+    }
+    .pf-tp-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .pf-tp-dots {
+      display: flex; gap: 0.45rem;
+    }
+    .pf-tp-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--border-gold); cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .pf-tp-dot.active { background: var(--gold); transform: scale(1.4); }
+    .pf-tp-arrows { display: flex; gap: 0.5rem; }
+    .pf-tp-arrow {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--border-gold);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 0.85rem; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .pf-tp-arrow:hover { background: var(--gold); color: var(--navy); }
+
+    /* "Todos" grid legacy kept minimal */
+    .portfolio-grid-legacy {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1rem;
+    }
+    .portfolio-grid-legacy .pf-legacy-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden; cursor: pointer;
+      transition: border-color 0.25s;
+    }
+    .portfolio-grid-legacy .pf-legacy-card:hover { border-color: var(--border-gold); }
+    .pf-legacy-thumb {
       background: var(--glass);
       aspect-ratio: 4/3;
       display: flex; align-items: center; justify-content: center;
-      border-right: 1px solid var(--border);
-      transition: background var(--dur) var(--ease);
-      overflow: hidden;
+      font-size: 2.4rem;
     }
-    .portfolio-item:nth-child(3n) { border-right: none; }
-    .portfolio-item:first-child { grid-column: span 2; aspect-ratio: 16/7; border-right: 1px solid var(--border); }
-    .portfolio-item:hover { background: var(--glass-hover); }
-    .portfolio-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(62,22,12,0.6), rgba(6,12,46,0.8));
-      display: flex; align-items: flex-end; padding: 1.8rem;
-      opacity: 0; transition: opacity var(--dur) var(--ease);
+    .pf-legacy-info { padding: 1rem 1.2rem; }
+    .pf-legacy-label { font-size: 0.86rem; font-weight: 500; }
+    .pf-legacy-cat { font-size: 0.7rem; color: var(--gold); margin-top: 0.25rem; letter-spacing: 0.06em; }
+
+    @media (max-width: 760px) {
+      .pf-slide { grid-template-columns: 1fr; }
+      .pf-slide-img { max-height: 260px; }
+      .pf-slide-text { padding: 1.8rem 1.4rem; }
+      .pf-tp-body { padding: 1.6rem 1.4rem 1.8rem; }
+      .portfolio-grid-legacy { grid-template-columns: 1fr 1fr; }
     }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-    .portfolio-thumb { font-size: 2.8rem; }
-    .portfolio-label { font-size: 0.88rem; font-weight: 500; }
-    .portfolio-cat { font-size: 0.7rem; color: var(--gold); margin-top: 0.3rem; letter-spacing: 0.08em; }
+    @media (max-width: 480px) {
+      .portfolio-grid-legacy { grid-template-columns: 1fr; }
+    }
 
     /* ── FAQ ─────────────────────────────────── */
     #faq { }
@@ -801,7 +962,7 @@
       .metricas { grid-template-columns: repeat(2, 1fr); }
       .depoimentos { grid-template-columns: 1fr; }
       .sm-grid { grid-template-columns: 1fr; }
-      .hero-logo-wrap img { height: 230px; }
+      .hero-logo-wrap img { height: 80px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1133,40 +1294,251 @@
       <div class="section-eyebrow">Nosso trabalho</div>
       <h2 class="section-title">Portfólio <em>selecionado</em></h2>
     </div>
+
+    <!-- TABS -->
     <div class="portfolio-tabs fade-in">
-      <button class="tab-btn active">Todos</button>
-      <button class="tab-btn">Criativos</button>
-      <button class="tab-btn">Identidade Visual</button>
+      <button class="tab-btn active" data-panel="todos">Todos</button>
+      <button class="tab-btn" data-panel="trafego">Tráfego Pago</button>
+      <button class="tab-btn" data-panel="socialmedia">Social Media</button>
+      <button class="tab-btn" data-panel="identidade">Identidade Visual</button>
     </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-item fade-in">
-        <div class="portfolio-thumb">🛍️</div>
-        <div class="portfolio-overlay">
-          <div>
-            <div class="portfolio-label">Campanha Black Friday</div>
-            <div class="portfolio-cat">Tráfego Pago · Meta Ads</div>
+
+    <!-- ── TODOS (grid de preview) ── -->
+    <div class="portfolio-panel active" id="panel-todos">
+      <div class="portfolio-grid-legacy">
+        <div class="pf-legacy-card fade-in" onclick="switchTab('trafego')">
+          <div class="pf-legacy-thumb" style="background:rgba(160,120,69,0.08);">
+            <img src="./src/img/trafegopago.png" alt="Tráfego Pago" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="pf-legacy-info">
+            <div class="pf-legacy-label">Tráfego Pago</div>
+            <div class="pf-legacy-cat">Meta Ads · Google Ads · TikTok Ads</div>
           </div>
         </div>
-      </div>
-      <div class="portfolio-item fade-in">
-        <div class="portfolio-thumb">💅</div>
-        <div class="portfolio-overlay">
-          <div>
-            <div class="portfolio-label">Identidade — Clínica Estética</div>
-            <div class="portfolio-cat">Design Estratégico</div>
+        <div class="pf-legacy-card fade-in" onclick="switchTab('socialmedia')">
+          <div class="pf-legacy-thumb" style="background:rgba(160,120,69,0.08);">
+            <img src="./src/img/identidade2.png" alt="Social Media" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="pf-legacy-info">
+            <div class="pf-legacy-label">Social Media</div>
+            <div class="pf-legacy-cat">Conteúdo · Reels · Gestão</div>
           </div>
         </div>
-      </div>
-      <div class="portfolio-item fade-in" style="border-right:none;">
-        <div class="portfolio-thumb">✨</div>
-        <div class="portfolio-overlay">
-          <div>
-            <div class="portfolio-label">Social Media — Restaurante</div>
-            <div class="portfolio-cat">Gestão de Redes</div>
+        <div class="pf-legacy-card fade-in" onclick="switchTab('identidade')">
+          <div class="pf-legacy-thumb" style="background:rgba(160,120,69,0.08);">
+            <img src="./src/img/visual1.png" alt="Identidade Visual" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="pf-legacy-info">
+            <div class="pf-legacy-label">Identidade Visual</div>
+            <div class="pf-legacy-cat">Branding · Design Estratégico</div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- ── TRÁFEGO PAGO ── -->
+    <div class="portfolio-panel" id="panel-trafego">
+      <div class="pf-tp-carousel fade-in" id="tp-carousel">
+        <div class="pf-tp-track" id="tp-track">
+
+          <!-- Slide 1 -->
+          <div class="pf-tp-slide">
+            <div class="pf-tp-img-wrap">
+              <img src="./src/img/trafegopago.png" alt="Tráfego Pago" />
+            </div>
+            <div class="pf-tp-body">
+              <div class="pf-slide-eyebrow">Tráfego Pago</div>
+              <div class="pf-tp-title">Gestão profissional nos maiores canais de <em>aquisição do mundo</em></div>
+              <p class="pf-tp-desc">Gestão de alta performance com foco obsessivo em ROI. Atraímos o público qualificado para que cada centavo investido retorne como receita para o seu caixa.</p>
+              <div class="pf-tp-footer">
+                <div class="pf-tp-dots" id="tp-dots"></div>
+                <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                  <div class="pf-tp-arrows">
+                    <button class="pf-tp-arrow" onclick="tpPrev()">&#8592;</button>
+                    <button class="pf-tp-arrow" onclick="tpNext()">&#8594;</button>
+                  </div>
+                  <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20gest%C3%A3o%20de%20tr%C3%A1fego%20pago!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Solicitar Diagnóstico</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="pf-tp-slide">
+            <div class="pf-tp-img-wrap">
+              <img src="./src/img/dashboard.png" alt="Dashboard" />
+            </div>
+            <div class="pf-tp-body">
+              <div class="pf-slide-eyebrow">Gestão de Dados</div>
+              <div class="pf-tp-title">Implementação de Dashboards, CRM e ferramentas de <em>I.A.</em></div>
+              <p class="pf-tp-desc">Tenha controle total do seu investimento com métricas auditáveis em tempo real para tomar decisões baseadas em fatos, não em palpites.</p>
+              <div class="pf-tp-footer">
+                <div class="pf-tp-dots" id="tp-dots-2"></div>
+                <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                  <div class="pf-tp-arrows">
+                    <button class="pf-tp-arrow" onclick="tpPrev()">&#8592;</button>
+                    <button class="pf-tp-arrow" onclick="tpNext()">&#8594;</button>
+                  </div>
+                  <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20dashboard%20e%20CRM!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Solicitar Diagnóstico</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="pf-tp-slide">
+            <div class="pf-tp-img-wrap">
+              <img src="./src/img/criativos.png" alt="Criativos" />
+            </div>
+            <div class="pf-tp-body">
+              <div class="pf-slide-eyebrow">Criativos de Alta Conversão</div>
+              <div class="pf-tp-title">Produção de ativos focados em <em>conversão</em>, não apenas estética</div>
+              <p class="pf-tp-desc">Anúncios desenvolvidos por especialistas em conversão e Landing Pages desenhadas para transformar visitantes curiosos em oportunidades reais.</p>
+              <div class="pf-tp-footer">
+                <div class="pf-tp-dots" id="tp-dots-3"></div>
+                <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                  <div class="pf-tp-arrows">
+                    <button class="pf-tp-arrow" onclick="tpPrev()">&#8592;</button>
+                    <button class="pf-tp-arrow" onclick="tpNext()">&#8594;</button>
+                  </div>
+                  <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20criativos%20e%20landing%20pages!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Solicitar Diagnóstico</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="pf-tp-slide">
+            <div class="pf-tp-img-wrap">
+              <img src="./src/img/growth.png" alt="Growth" />
+            </div>
+            <div class="pf-tp-body">
+              <div class="pf-slide-eyebrow">Escala e Growth</div>
+              <div class="pf-tp-title">Planejamento de escala modular adaptado ao seu <em>momento de negócio</em></div>
+              <p class="pf-tp-desc">O seu marketing gerenciado de ponta a ponta por especialistas em growth que realmente se importam com o seu ROI.</p>
+              <div class="pf-tp-footer">
+                <div class="pf-tp-dots" id="tp-dots-4"></div>
+                <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                  <div class="pf-tp-arrows">
+                    <button class="pf-tp-arrow" onclick="tpPrev()">&#8592;</button>
+                    <button class="pf-tp-arrow" onclick="tpNext()">&#8594;</button>
+                  </div>
+                  <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20planejamento%20de%20escala!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Solicitar Diagnóstico</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tp-track -->
+      </div><!-- /tp-carousel -->
+    </div><!-- /panel-trafego -->
+
+    <!-- ── SOCIAL MEDIA ── -->
+    <div class="portfolio-panel" id="panel-socialmedia">
+      <div class="pf-carousel fade-in" id="sm-carousel">
+        <div class="pf-track" id="sm-track">
+
+          <!-- Slide 1 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/identidade2.png" alt="Social Media" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Social Media</div>
+              <div class="pf-slide-title">Conteúdo que <em>conecta</em> e converte</div>
+              <p class="pf-slide-desc">Criamos calendários editoriais estratégicos, Reels de alto alcance e copies que falam direto com a sua audiência. Do planejamento à publicação, tudo com intenção de negócio.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20gest%C3%A3o%20de%20social%20media!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero meu Social Media</a>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/identidade1.png" alt="Social Media Reels" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Reels &amp; Vídeos</div>
+              <div class="pf-slide-title">Presença diária que <em>gera autoridade</em></div>
+              <p class="pf-slide-desc">Vídeos curtos com roteiro estratégico que colocam sua marca no radar todos os dias. Produção completa: roteiro, gravação, edição e legendas otimizadas para cada plataforma.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20produ%C3%A7%C3%A3o%20de%20v%C3%ADdeos!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero meu Social Media</a>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/identidade3.png" alt="Social Media Feed" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Design de Feed</div>
+              <div class="pf-slide-title">Feed que <em>vende</em> antes de falar</div>
+              <p class="pf-slide-desc">Identidade visual consistente em todas as peças. Um feed que causa boa impressão imediata, comunica profissionalismo e converte visitantes em seguidores engajados.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20design%20de%20feed!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero meu Social Media</a>
+            </div>
+          </div>
+
+        </div><!-- /sm-track -->
+        <div class="pf-nav">
+          <button class="pf-arrow" onclick="smPrev()">&#8593;</button>
+          <button class="pf-arrow" onclick="smNext()">&#8595;</button>
+        </div>
+        <div class="pf-dots" id="sm-dots"></div>
+      </div>
+    </div><!-- /panel-socialmedia -->
+
+    <!-- ── IDENTIDADE VISUAL ── -->
+    <div class="portfolio-panel" id="panel-identidade">
+      <div class="pf-carousel fade-in" id="id-carousel">
+        <div class="pf-track" id="id-track">
+
+          <!-- Slide 1 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/visual1.png" alt="Identidade Visual" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Identidade Visual</div>
+              <div class="pf-slide-title">Marcas que <em>ficam na memória</em></div>
+              <p class="pf-slide-desc">Criamos identidades visuais que comunicam o posicionamento da sua marca antes mesmo de você dizer uma palavra. Do logotipo ao manual de marca completo.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20identidade%20visual!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero minha Identidade</a>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/visual2.png" alt="Branding" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Branding Estratégico</div>
+              <div class="pf-slide-title">Design que <em>justifica o preço</em> que você cobra</div>
+              <p class="pf-slide-desc">Tipografia, paleta de cores e elementos visuais selecionados para transmitir autoridade e alinhar percepção de valor ao posicionamento real da sua marca.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20branding!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero minha Identidade</a>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="pf-slide">
+            <div class="pf-slide-img">
+              <img src="./src/img/visual3.png" alt="Manual de Marca" />
+            </div>
+            <div class="pf-slide-text">
+              <div class="pf-slide-eyebrow">Manual de Marca</div>
+              <div class="pf-slide-title">Consistência visual em <em>todos os pontos de contato</em></div>
+              <p class="pf-slide-desc">Entregamos um manual de marca completo para que sua comunicação seja consistente em redes sociais, materiais impressos, embalagens e qualquer aplicação futura.</p>
+              <a href="https://wa.me/5547996205894?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20manual%20de%20marca!" target="_blank" rel="noopener" class="pf-slide-cta">💬 Quero minha Identidade</a>
+            </div>
+          </div>
+
+        </div><!-- /id-track -->
+        <div class="pf-nav">
+          <button class="pf-arrow" onclick="idPrev()">&#8593;</button>
+          <button class="pf-arrow" onclick="idNext()">&#8595;</button>
+        </div>
+        <div class="pf-dots" id="id-dots"></div>
+      </div>
+    </div><!-- /panel-identidade -->
+
   </div>
 </section>
 
