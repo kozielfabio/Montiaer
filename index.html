@@ -16,7 +16,7 @@
       --sand-dim:   rgba(232,217,196,0.55);
       --gold:       #a07845;
       --gold-light: #c4965c;
-      --navy:       #060c2e;
+      --navy:       #060b31;
       --navy-mid:   #0d1540;
       --maroon:     #3e160c;
       --maroon-mid: #5a2014;
@@ -134,14 +134,22 @@
       opacity: 0.4; pointer-events: none;
     }
     .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; animation: drift 14s ease-in-out infinite alternate; }
-    .orb-1 { width: 70vw; height: 70vw; max-width: 700px; max-height: 700px; background: radial-gradient(circle, rgba(90,32,20,0.55) 0%, transparent 70%); top: -15%; left: -15%; animation-delay: 0s; }
-    .orb-2 { width: 45vw; height: 45vw; max-width: 480px; max-height: 480px; background: radial-gradient(circle, rgba(160,120,69,0.22) 0%, transparent 70%); bottom: 5%; right: -8%; animation-delay: -5s; }
+    .orb-1 { width: 70vw; height: 70vw; max-width: 700px; max-height: 700px; background: radial-gradient(circle, rgba(90,32,20,0.72) 0%, transparent 70%); top: -15%; left: -15%; animation-delay: 0s; }
+    .orb-2 { width: 45vw; height: 45vw; max-width: 480px; max-height: 480px; background: radial-gradient(circle, rgba(160,120,69,0.36) 0%, transparent 70%); bottom: 5%; right: -8%; animation-delay: -5s; }
     .orb-3 { width: 30vw; height: 30vw; max-width: 320px; max-height: 320px; background: radial-gradient(circle, rgba(13,21,64,0.8) 0%, transparent 70%); top: 45%; left: 38%; animation-delay: -9s; }
     @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(50px, 35px) scale(1.1); } }
 
     .hero-inner { position: relative; z-index: 2; max-width: 860px; text-align: center; }
-    .hero-logo-wrap { margin-bottom: 2.2rem; animation: fadeUp 0.7s var(--ease) both; }
-    .hero-logo-wrap img { width: 70%; max-width: 600px; height: auto; margin: 0 auto; mix-blend-mode: lighten; }
+    .hero-logo-wrap { position: relative; display: inline-block; margin: 0 auto 2.2rem; animation: fadeUp 0.7s var(--ease) both; }
+    .hero-logo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -18% -10%;
+      background: radial-gradient(ellipse 62% 62% at center, var(--navy) 48%, transparent 82%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .hero-logo-wrap img { display: block; width: 70vw; max-width: 600px; height: auto; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 0.6rem;
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
